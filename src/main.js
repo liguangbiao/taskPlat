@@ -11,7 +11,7 @@ Vue.use(AlertPlugin);
 var instance=axios.create({
   // headers:{'Access-Control-Allow-Origin':'*',"Authorization": sessionStorage.getItem("token")},
   // headers:{'Access-Control-Allow-Origin':'*',"Authorization": s},
-  transformRequest: [function (data) {   //请求体格式转换
+  transformRequest: [function (data) {
     data = qs.stringify(data);
     return data;
   }],
