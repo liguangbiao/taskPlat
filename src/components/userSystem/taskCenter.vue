@@ -2,30 +2,37 @@
     <div>
       <div class="head">
         <span class="menu" @click="changeSizebar(true)"></span>
-        <p>任务中心</p>
+        <p></p>
       </div>
-      <div class="nav">
-        <a><span>全部</span></a>
-        <a><span>进行中</span></a>
-        <a><span>已结束</span></a>
+      <div class="banner">
+        <!--<img src="../../assets/logo.png">-->
       </div>
-      <div class="main">
-        <a class="list bg" v-for="(item,key) in list">
-          <span class="state" :class="{state0:item.state == 0}">{{item.state == 1?"进行中":"已结束"}}</span>
-          <div class="list_head">
-            <div><img :src="item.img"><p>{{item.title}}<span>{{item.date}}截止</span></p></div>
-            <span>￥{{item.money}}</span>
-          </div>
-          <p>告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告</p>
-          <!--<div class="shadow"></div>-->
-        </a>
+      <div class="contain">
+        <div class="nav">
+          <span class="jiantou"></span>
+          <a>全部服务</a>
+          <a>电商服务</a>
+          <a>法律服务</a>
+          <span class="jiantou" style="transform: rotate(135deg)"></span>
+        </div>
+        <div class="main">
+          <a class="list bg" v-for="(item,key) in list">
+            <span class="state" :class="{state0:item.state == 0}">{{item.state == 1?"进行中":"已结束"}}</span>
+            <div class="list_head">
+              <div><img :src="item.img"><p>{{item.title}}<span>{{item.date}}截止</span></p></div>
+              <span>￥{{item.money}}</span>
+            </div>
+            <p>告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告制定广告</p>
+            <!--<div class="shadow"></div>-->
+          </a>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "taskCenter",
+      name: "taskCenter",
       data(){
           return {
             list:[
@@ -58,7 +65,7 @@
 
 <style scoped>
   .head{
-    background:#4B63F8;
+    background:white;
     height: 1.32rem;
     display: flex;
     align-items: center;
@@ -74,35 +81,55 @@
   .menu{
     width: 0.45rem;
     height: 0.07rem;
-    border-top: 0.07rem solid white;
-    border-bottom: 0.07rem solid white;
-    background-color: white;
+    border-top: 0.07rem solid gray;
+    border-bottom: 0.07rem solid gray;
+    background-color: gray;
     padding: 0.1rem 0;
     background-clip:content-box;
     z-index: 200;
   }
-  .nav{
-    display: flex;
+  .banner{
     width: 100%;
-    height: 1rem;
-    background-color:white;
+    height: 3.4rem;
+    background:#4B63F8;
+  }
+  /*.banner>img{*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+  /*}*/
+  .contain{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: -0.66rem;
+  }
+  .nav{
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px rgba(165,165,165,0.3);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.42rem 0.3rem;
+    color: #585858;
+
   }
   .nav>a{
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
+    border-right: 1px solid rgba(165,165,165,0.53);
+    padding: 0 0.3rem;
+    letter-spacing: 1px;
+    font-size: 0.3rem;
   }
-  .nav>a:hover{
-    border-bottom: 2px solid #4B63F8;
+  .nav>a:nth-child(4){
+    border: none;
   }
-  .nav>a>span{
+  .jiantou{
+    width: 0.14rem;
+    height: 0.14rem;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
     display: inline-block;
-    width: 100%;
-    border-right: 1px solid gainsboro;
-  }
-  .main{
-    margin: 0 0.2rem;
+    transform: rotate(-45deg);
+    margin: 0;
   }
   .list{
     background-color: white;
@@ -194,4 +221,12 @@
     background-repeat:repeat-x;
     background-position:0 100%;
   }
+  /*.shadow{*/
+    /*width: 100%;*/
+    /*height: 0.5rem;*/
+    /*position: absolute;*/
+    /*bottom: -0.5rem;*/
+    /*box-shadow: 50px 50px 50px 20px blue;*/
+    /*z-index: 500;*/
+  /*}*/
 </style>

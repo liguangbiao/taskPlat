@@ -5,19 +5,18 @@
         <p></p>
         <div class="info">
           <img :src="userImg">
-          <p>{{userName}}</p>
+          <!--<p>{{userName}}</p>-->
           <span>{{userPhone}}</span>
           <div>
-            <p>{{userIn}}<br><span>收入（元）</span></p>
-            <p>{{userMoney}}<br><span>余额（元）</span></p>
+            <!--<p>{{userIn}}<br><span>收入（元）</span></p>-->
+            <p><span>余额（元）</span><br>{{userMoney}}</p>
           </div>
         </div>
       </div>
       <div class="list">
-        <a><span><img src="../../assets/usera1.png">收入明细</span><span></span></a>
-        <a><span><img src="../../assets/usera2.png">余额明细</span><span></span></a>
-        <a><span><img src="../../assets/usera3.png">提现明细</span><span></span></a>
-        <a><span><img src="../../assets/usera4.png">绑定支付宝</span><span></span></a>
+        <a><span><img src="../../assets/usera1.png">商家资金流水</span><span></span></a>
+        <a><span><img src="../../assets/usera2.png">充值记录</span><span></span></a>
+        <a><span><img src="../../assets/usera3.png">余额充值入口</span><span></span></a>
       </div>
     </div>
 </template>
@@ -33,24 +32,6 @@
             userIn:500,
             userMoney:"4,500"
           }
-      },
-      mounted(){
-        this.axios.get("/api/v2/getOneUser",{params:{userId:this.$store.state.userInfo.id}})
-          .then((data)=>{
-            if(data.data.code == 1){
-              this.userImg=data.data.data.img;
-              this.userName=data.data.data.userName;
-              this.userPhone=data.data.data.account;
-              this.userIn=data.data.data.income;
-              this.userMoney=data.data.data.wallet;
-            }else{
-              this.$vux.alert.show({
-                title:"提示",
-                content:data.data.msg
-              })
-            }
-
-          })
       },
       methods:{
         changeSizebar:function (bool) {
@@ -104,21 +85,24 @@
     margin: 0.1rem;
     font-size: 0.36rem;
     letter-spacing: 0.5px;
+    font-weight: lighter;
+    font-family: 宋体;
   }
   .info>div{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 76%;
   }
   .info>div>p{
     text-align: center;
     font-size: 0.7rem;
     width: 50%;
-    margin: 0.3rem;
+    margin: -0.1rem 0 0.5rem 0;
     line-height: 0.6rem;
   }
   .info>div>p>span{
     font-size: 0.3rem;
+    font-weight: bold;
   }
   .list{
     margin-top: 0.2rem;

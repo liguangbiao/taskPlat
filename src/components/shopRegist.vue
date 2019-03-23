@@ -2,13 +2,13 @@
   <div>
     <div class="head">
       <span class="menu" @click="changeSizebar(true)"></span>
-      <p>用户注册</p>
+      <p>商家注册</p>
     </div>
     <div class="wrap">
       <input placeholder="输入手机号码" type="text" class="w_input" v-model="userPhone">
       <input placeholder="输入密码" type="password" class="w_input" v-model="userPwd">
       <input placeholder="再次输入密码" type="password" class="w_input" v-model="userPwd1">
-      <input placeholder="输入昵称" type="text" class="w_input" v-model="userName">
+      <!--<input placeholder="输入昵称" type="text" class="w_input" v-model="userName">-->
       <div class="wrap_div">
         <label><input type="checkbox" class="state"><span>已阅读服务协议</span></label>
         <span></span>
@@ -35,12 +35,12 @@
         },
         regist:function () {
           this.axios({
-            url:"api/v2/userRegister",
+            url:"api/v2/shopRegister",
             method:'POST',
             data:{
               account:this.userPhone,
               password :this.userPwd,
-              userName :this.userPhone,
+              // userName :this.userPhone,
             }
           }).then((data)=>{
             this.$vux.alert.show({

@@ -3,9 +3,10 @@
     <div id="side_bar" :class="{show:this.$store.state.showSizebar}" class="side_bar">
       <span class="jiantou" @click="changeSizebar(false)"></span>
       <ul class="select">
-        <li @click="go('/Login')">网站首页</li>
-        <li @click="go('/Regist')">任务大厅</li>
-        <li>商家中心</li>
+        <li @click="go('/Login')">用户登录</li>
+        <li @click="go('/userSystem/userCenter')">用户中心</li>
+        <li @click="go('/shopLogin')">商家登录</li>
+        <li @click="go('/shopSystem/userCenter')">商家中心</li>
       </ul>
     </div>
     <router-view id="contain"/>  <!-- @click.native="changeSizebar(false) -->
@@ -32,6 +33,25 @@ export default {
   mounted() {
     document.getElementById("app").style.height=window.screen.height+"px";
     document.getElementById("side_bar").style.height=window.screen.height+"px";
+    if(sessionStorage.getItem("usertoken") && sessionStorage.getItem("usertoken") != "null"){
+      this.$store.commit("setUser",[sessionStorage.getItem("usertoken"),sessionStorage.getItem("userid")]);
+      this.$store.commit("changeUserLogin",true);
+      this.axios.defaults.headers['acc-token']=this.$store.state.userInfo.token;
+    }
+    if(sessionStorage.getItem("shoptoken") && sessionStorage.getItem("shoptoken") != "null"){
+      this.$store.commit("setShop",[sessionStorage.getItem("shoptoken"),sessionStorage.getItem("shopid")]);
+      this.$store.commit("changeShopLogin",true);
+      this.axios.defaults.headers['acc-token']=this.$store.state.shopInfo.token;
+    }
+    // if(!this.$store.state.isUserLogin){
+    //   if(!sessionStorage.getItem("usertoken")){
+    //     this.$router.push('/Login')
+    //   }else{
+    //     this.$store.commit("setUser",[sessionStorage.getItem("usertoken"),sessionStorage.getItem("userid")]);
+    //     this.$store.commit("changeUserLogin",true);
+    //     this.axios.defaults.headers['acc-token']=this.$store.state.userInfo.token;
+    //   }
+    // }
   },
 
 }
@@ -62,6 +82,7 @@ export default {
     transition: left 0.3s ease;
     z-index: 999;
     text-align: left;
+    opacity: 0.9;
   }
   .show{
     left: 0px;

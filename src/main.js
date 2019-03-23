@@ -9,7 +9,7 @@ import qs from 'qs'
 import  { AlertPlugin } from 'vux'
 Vue.use(AlertPlugin);
 var instance=axios.create({
-  // headers:{'Access-Control-Allow-Origin':'*',"Authorization": sessionStorage.getItem("token")},
+  // headers:{"acc-token": store.state.userInfo.token},
   // headers:{'Access-Control-Allow-Origin':'*',"Authorization": s},
   transformRequest: [function (data) {
     data = qs.stringify(data);
@@ -17,6 +17,7 @@ var instance=axios.create({
   }],
   timeout:10000
 });
+// instance.defaults.headers.common['acc-token'] =sessionStorage.getItem("token");
 //定义一个请求拦截器
 instance.interceptors.request.use(
   config => {
@@ -60,15 +61,48 @@ instance.interceptors.response.use(function(config){
 Vue.prototype.axios=instance;
 Vue.config.productionTip = false;
 // router.beforeEach(function (to,from,next) {
-//   if(!store.state.islogin){  //判断登录状态
-//     if(to.path == "/login"){
-//       next();
-//     }else {
-//       next({path:"/login"})
-//     }
-//   }else {
+//   if(to.path == "/Login" || to.path == "/Regist" || to.path == "/shopLogin" || to.path == "/shopRegist" || to.path == "/test"){
 //     next()
+//   }else{
+//     if(to.path.indexOf("userSystem") != -1){
+//       sessionStorage.setItem("shoptoken",null);
+//       if(!store.state.isUserLogin){
+//         Vue.$vux.alert.show({
+//           title: "提示",
+//           content: "请先登录！",
+//           onHide(){
+//             next({path:"/Login"})
+//           }
+//         });
+//       }else{
+//         next()
+//       }
+//     }else if(to.path.indexOf("shopSystem") != -1){
+//       sessionStorage.setItem("usertoken",null);
+//       if(!store.state.isShopLogin){
+//         Vue.$vux.alert.show({
+//           title: "提示",
+//           content: "请先登录！",
+//           onHide(){
+//             next({path:"/shopLogin"})
+//           }
+//         });
+//       }else{
+//         next()
+//       }
+//     }else{
+//       next()
+//     }
 //   }
+//   // if(!store.state.isUserLogin){  //判断登录状态
+//   //   if(to.path == "/Login"){
+//   //     next();
+//   //   }else {
+//   //     next({path:"/Login"})
+//   //   }
+//   // }else {
+//   //   next()
+//   // }
 // });
 
 /* eslint-disable no-new */

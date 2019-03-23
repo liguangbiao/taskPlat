@@ -2,7 +2,7 @@
   <div>
     <div class="head">
       <span class="menu" @click="changeSizebar(true)"></span>
-      <p>用户登录</p>
+      <p>商家登录</p>
     </div>
     <div class="wrap">
       <input placeholder="输入账号" type="text" class="w_input" v-model="userName">
@@ -60,7 +60,7 @@
           // handler:
           login:function(){
             this.axios({
-              url:'api/v2/userLogin',
+              url:'api/v2/shopLogin',
               // url:'api/v2/getGeeTestTwo',
               method:'post',
               data:{
@@ -72,17 +72,17 @@
                 password:this.userPwd,
               }
             }).then((data)=>{
-              sessionStorage.setItem("usertoken",data.data.data.token);
-              sessionStorage.setItem("userid",data.data.data.id);
-              this.$store.commit("setUser",[data.data.data.token,data.data.data.id]);
-              this.$store.commit("changeUserLogin",true);
+              sessionStorage.setItem("shoptoken",data.data.data.token);
+              sessionStorage.setItem("shopid",data.data.data.id);
+              this.$store.commit("setShop",[data.data.data.token,data.data.data.id]);
+              this.$store.commit("changeShopLogin",true);
               this.axios.defaults.headers['acc-token']=data.data.data.token;
               var self=this;
               this.$vux.alert.show({
                 title:"提示",
                 content:data.data.msg,
                 onHide() {
-                  self.$router.push('/userSystem/userCenter')
+                  self.$router.push('/shopSystem/userCenter')
                 }
               })
 

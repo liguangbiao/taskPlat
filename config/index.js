@@ -13,7 +13,9 @@ module.exports = {
     proxyTable: {
       //上线打包的时候把代理注释
         '/api':{
-          target:'http://192.168.2.124:8083/UserSystem/',
+          // target:'http://www.aixwl.com/gateway',
+          target:'http://www.aixwl.com/ShopSystem',
+          // target:'http://192.168.2.124:8083/UserSystem',
           changeOrigin:true,
           pathRewrite: {
             '^/api':'/'
